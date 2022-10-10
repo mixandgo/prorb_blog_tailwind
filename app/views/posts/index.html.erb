@@ -1,0 +1,27 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Posts</h1>
+    <%= link_to 'New post', new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <%= turbo_frame_tag "posts" do %>
+    <div class="grid grid-cols-3 gap-4 mt-8">
+      <div class="p-4 bg-gray-200 font-bold">Title</div>
+      <div class="p-4 bg-gray-200 font-bold"><%= link_to "Date", posts_path(sort: @order) %></div>
+      <div class="p-4 bg-gray-200 font-bold">Actions</div>
+      <% @posts.each do |post| %>
+        <div class="font-bold px-4"><%= link_to post.title, post_path(post) %></div>
+        <div class="px-4"><%= post.created_at.to_s(:short) %></div>
+        <div class="px-4 text-sky-500 underline">
+          <%= link_to "Edit", edit_post_path(post) %>
+          |
+          <%= link_to "Delete", post_path(post), data: { turbo_method: :delete } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
