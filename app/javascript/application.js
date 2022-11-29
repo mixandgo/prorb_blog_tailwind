@@ -2,4 +2,17 @@
 import "@hotwired/turbo-rails";
 import "./controllers";
 import "flowbite";
-import "flowbite/dist/datepicker";
+// import "flowbite/dist/datepicker";
+import Datepicker from "flowbite-datepicker/Datepicker";
+
+document.addEventListener("turbo:render", () => {
+  document.querySelectorAll("[datepicker]").forEach(function (datepickerEl) {
+    new Datepicker(datepickerEl);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[datepicker]").forEach(function (datepickerEl) {
+    new Datepicker(datepickerEl);
+  });
+});
